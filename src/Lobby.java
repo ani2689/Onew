@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -114,9 +115,7 @@ public class Lobby extends Thread{
 
     Lobby() {
 
-        JFrame f = new JFrame();
-
-        f.setTitle("오뉴");
+        JFrame f = new JFrame("오뉴");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setResizable(false);
         f.add(lobbyPanel);
@@ -130,7 +129,7 @@ public class Lobby extends Thread{
         gardenButton.addActionListener(event -> {
             if (onlyOne == 0) {
                 onlyOne++;
-                new Garden();
+                new Garden().start();
             }
         });
 

@@ -14,14 +14,21 @@ public class Garden extends Thread {
 
 
     Garden(){
-        JFrame f = new JFrame();
+    }
 
-        f.setTitle("자바프로젝트");
+
+    @Override
+    public void run(){
+        JFrame f = new JFrame("가든");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon background = new ImageIcon(Lobby.class.getResource("/img/box.png"));
+        JLabel bg= new JLabel(background);
+        gamePanel.add(bg);
         f.setResizable(false);
         f.add(gardenPanel);
         f.setBounds(500,500,500,500);
         f.setLocation(785,150);
+
         f.setVisible(true);
 
 
@@ -29,15 +36,13 @@ public class Garden extends Thread {
             f.setVisible(false);
             Lobby.onlyOne--;
         });
-
-        createFood();
-    }
-
-    void createFood (){
         while(true){
-            try {
-                new Food((int)(Math.random()* (gamePanel.getWidth()-70)),(int)(Math.random()* (gamePanel.getHeight()-70)),(int)(Math.random()*4)+1);
-                Thread.sleep(2000);
+            try{
+                Thread.sleep(100);
+                gamePanel.remove(bg);
+                new Food((int)(Math.random()* (gamePanel.getWidth()-95))+12,(int)(Math.random()* (gamePanel.getHeight()-95))+12,(int)(Math.random()*4)+1);
+                gamePanel.add(bg);
+
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -130,7 +135,6 @@ public class Garden extends Thread {
     }
 
     public static void main(String[] args) {
-        new Garden();
+        new Garden().start();
     }
-
 }

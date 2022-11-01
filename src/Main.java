@@ -1,11 +1,6 @@
-import javax.swing.*;
-
 
 
 public class Main {
-
-
-    static JFrame f = new JFrame();
 
     public static void main(String[] args) {
         new Main();
