@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Garden {
+public class Garden extends Thread {
     private JPanel gardenPanel;
     private JPanel sidePanel;
     private JLabel farmmer;
@@ -30,7 +30,10 @@ public class Garden {
             Lobby.onlyOne--;
         });
 
+        createFood();
+    }
 
+    void createFood (){
         while(true){
             try {
                 new Food((int)(Math.random()* (gamePanel.getWidth()-70)),(int)(Math.random()* (gamePanel.getHeight()-70)),(int)(Math.random()*4)+1);
@@ -125,4 +128,9 @@ public class Garden {
             }
         }
     }
+
+    public static void main(String[] args) {
+        new Garden();
+    }
+
 }

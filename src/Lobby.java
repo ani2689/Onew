@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Queue;
 
 public class Lobby extends Thread{
     private JPanel leftUnderPanel;
@@ -129,7 +130,7 @@ public class Lobby extends Thread{
         gardenButton.addActionListener(event -> {
             if (onlyOne == 0) {
                 onlyOne++;
-                run();
+                new Garden();
             }
         });
 
