@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Garden extends Thread {
     private JPanel gardenPanel;
@@ -12,8 +14,11 @@ public class Garden extends Thread {
     private JPanel exitPanel;
     private JButton exit;
 
+    static Queue<FoodList> foodList = new LinkedList<>();
+
 
     Garden(){
+
     }
 
 
@@ -36,9 +41,12 @@ public class Garden extends Thread {
             f.setVisible(false);
             Lobby.onlyOne--;
         });
+
+        new FammerMove().start();
+
         while(true){
             try{
-                Thread.sleep(100);
+                Thread.sleep((int)(Math.random()*1500)+500);
                 gamePanel.remove(bg);
                 new Food((int)(Math.random()* (gamePanel.getWidth()-95))+12,(int)(Math.random()* (gamePanel.getHeight()-95))+12,(int)(Math.random()*4)+1);
                 gamePanel.add(bg);
@@ -47,6 +55,25 @@ public class Garden extends Thread {
                 e.printStackTrace();
             }
 
+        }
+    }
+
+    class FammerMove extends Thread{
+        @Override
+        public void run() {
+            ImageIcon ic1 =  new ImageIcon(Lobby.class.getResource("/img/farmer1.png"));
+            ImageIcon ic2 =  new ImageIcon(Lobby.class.getResource("/img/farmer2.png"));
+
+            try {
+                while(true){
+                    farmmer.setIcon(ic1);
+                    Thread.sleep(500);
+                    farmmer.setIcon(ic2);
+                    Thread.sleep(500);
+                }
+            }catch (Exception e){
+
+            }
         }
     }
 
@@ -80,7 +107,8 @@ public class Garden extends Thread {
             foodButton.addActionListener(e -> {
                 int nextCount = Integer.parseInt(score.getText())+1;
                 score.setText(String.valueOf(nextCount));
-
+                FoodList saveFood=new FoodList(satiation,getImg());
+                foodList.add(saveFood);
 
                 foodButton.setVisible(false);
             });
@@ -136,5 +164,23 @@ public class Garden extends Thread {
 
     public static void main(String[] args) {
         new Garden().start();
+    }
+}
+
+class FoodList{
+    private int satiation;
+    private String img;
+
+    FoodList(int satiation,String img){
+        this.satiation=satiation;
+        this.img=img;
+    }
+
+    public int getSatiation() {
+        return satiation;
+    }
+
+    public String getImg() {
+        return img;
     }
 }

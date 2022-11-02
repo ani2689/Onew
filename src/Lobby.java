@@ -133,12 +133,17 @@ public class Lobby extends Thread{
             }
         });
 
-        onewMove();
     }
 
-    void onewMove() {
+
+    @Override
+    public void run() {
 
         Onew o = new Onew("설희");
+        onewMove(o);
+    }
+
+    void onewMove(Onew o) {
         setCostume(o);
 
         try {
