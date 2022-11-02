@@ -1,9 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Queue;
 
 public class Lobby extends Thread{
     private JPanel leftUnderPanel;
@@ -15,11 +10,26 @@ public class Lobby extends Thread{
     private JPanel rightPanel;
     private JButton gardenButton;
     private JPanel lobbyPanel;
+    private JPanel barPanel;
+    private JPanel hpPanel;
+    private JPanel fullPanel;
+    private JLabel hpBar;
+    private JLabel fullBar;
+    private JPanel binLf;
+    private JPanel binRt;
+    private JLabel messege;
+    private JPanel textPanel;
+
+    static String messegeText;
+    static ImageIcon hpBarImg;
+    static ImageIcon fullBarImg;
 
     String costume;
 
     static int onlyOne=0;
     static int click=0;
+
+    Onew o ;
 
     /*
     class LobbyMouseAdapter implements MouseListener {
@@ -111,9 +121,19 @@ public class Lobby extends Thread{
         }
     }*/
 
+    void setIcon(){
+        hpBar.setIcon(hpBarImg);
+        fullBar.setIcon(fullBarImg);
+    }
 
+    void setMessage(){
+        messege.setText(getMessegeText());
+    }
 
-    Lobby() {
+    String getMessegeText(){
+        return messegeText;
+    }
+    Lobby(Onew objOn) {
 
         JFrame f = new JFrame("오뉴");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -122,9 +142,13 @@ public class Lobby extends Thread{
         f.setBounds(500, 500, 500, 500);
         f.setLocation(300, 150);
 
+        o = objOn;
+
         //charctorPanel.addMouseListener(new LobbyMouseAdapter());
 
         f.setVisible(true);
+
+        start();
 
         gardenButton.addActionListener(event -> {
             if (onlyOne == 0) {
@@ -133,13 +157,49 @@ public class Lobby extends Thread{
             }
         });
 
+        eattingButton.addActionListener(e -> {
+            int x=charctor.getX();
+            charctor.setLocation(x,charctor.getY());
+            if(Garden.foodList.peek()!=null&&o.getFull()<100){
+
+                FoodList fd =  Garden.foodList.poll();
+                if(o.getFull()+fd.getSatiation()>=100){
+                    messegeText="포만도가"+((o.getFull()+fd.getSatiation())-100)+"만큼 올랐어요.";
+                    o.setFull(100);
+                }else{
+                    messegeText="포만도가"+fd.getSatiation()+"만큼 올랐어요.";
+                    o.setFull(o.getFull()+ fd.getSatiation());
+                }
+            }else if(Garden.foodList.peek()==null){
+                messegeText="냉장고에 먹이가 없어요!";
+            }else{
+                messegeText="오뉴는 지금 충분히 배가 불러요.";
+            }
+            setMessage();
+            charctor.setLocation(x,charctor.getY());
+        });
+
+        hpBarImg=new ImageIcon(Onew.class.getResource("/img/hpBar/hpBar10.png"));
+        fullBarImg=new ImageIcon(Onew.class.getResource("/img/fullBar/fullBar10.png"));
+
+       for (int i=0;;i++){
+           if(i==100){
+               setMessage();
+               i=0;
+           }
+           setIcon();
+           try {
+               Thread.sleep(100);
+           } catch (InterruptedException e) {
+
+           }
+       }
     }
+
 
 
     @Override
     public void run() {
-
-        Onew o = new Onew("설희");
         onewMove(o);
     }
 
@@ -198,12 +258,12 @@ public class Lobby extends Thread{
         Thread.sleep(100);
         charctor.setIcon(ic2);
 
-        for(int i=0;i<5;i++){
-            charctor.setLocation(charctor.getX(),charctor.getY()-i*3);
+        for(int i=0;i<3;i++){
+            charctor.setLocation(charctor.getX(),charctor.getY()-i*2);
             Thread.sleep(150);
         }
-        for(int i=0;i<5;i++){
-            charctor.setLocation(charctor.getX(),charctor.getY()+i*3);
+        for(int i=0;i<3;i++){
+            charctor.setLocation(charctor.getX(),charctor.getY()+i*2);
             Thread.sleep(150);
         }
 
@@ -224,12 +284,12 @@ public class Lobby extends Thread{
         Thread.sleep(100);
         charctor.setIcon(ic2);
 
-        for(int i=0;i<5;i++){
-            charctor.setLocation(charctor.getX(),charctor.getY()-i*3);
+        for(int i=0;i<3;i++){
+            charctor.setLocation(charctor.getX(),charctor.getY()-i*2);
             Thread.sleep(150);
         }
-        for(int i=0;i<5;i++){
-            charctor.setLocation(charctor.getX(),charctor.getY()+i*3);
+        for(int i=0;i<3;i++){
+            charctor.setLocation(charctor.getX(),charctor.getY()+i*2);
             Thread.sleep(150);
         }
 

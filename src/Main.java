@@ -1,7 +1,9 @@
 
 
-public class Main {
+public class Main{
 
+    static int gameOver;
+    Onew o = new Onew("히");
     public static void main(String[] args) {
         new Main();
     }
@@ -10,11 +12,7 @@ public class Main {
         lobbyFrame();
     }
 
-    public void gardenFrame(){
-        new Garden();
-    }
-
     public void lobbyFrame(){
-        new Lobby();
+        new Lobby(o);
     }
 }
