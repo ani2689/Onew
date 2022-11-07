@@ -158,12 +158,14 @@ public class Lobby extends Thread{
                     MessageBox.messageText="포만도가"+fd.getSatiation()+"만큼 올랐어요.";
                     o.setFull(o.getFull()+ fd.getSatiation());
                 }
+                mb.setMessageWithImg(fd.getImg());
             }else if(Garden.foodList.peek()==null){
                 MessageBox.messageText="냉장고에 먹이가 없어요!";
+                mb.setMessage();
             }else{
                 MessageBox.messageText="오뉴는 지금 충분히 배가 불러요.";
+                mb.setMessage();
             }
-            mb.setMessage();
         });
 
 

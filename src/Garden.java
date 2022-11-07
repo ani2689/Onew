@@ -31,7 +31,7 @@ public class Garden extends Thread {
         gamePanel.add(bg);
         f.setResizable(false);
         f.add(gardenPanel);
-        f.setBounds(500,598,500,598);
+        f.setBounds(500,500,500,500);
         f.setLocation(785,150);
 
         f.setVisible(true);

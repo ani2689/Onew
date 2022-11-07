@@ -5,6 +5,9 @@ public class MessageBox {
     JFrame f;
 
     private JPanel messageBoxPanel;
+    private JButton button1;
+    private JPanel foodImgPanel;
+    private JLabel foodImg;
     private JButton text;
 
     private JLabel messageBox;
@@ -15,7 +18,7 @@ public class MessageBox {
         f = new JFrame("메세지박스");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setResizable(false);
-        f.setBounds(490, 150, 484, 200);
+        f.setBounds(490, 102, 484, 102);
         f.setLocation(308, 540);
         f.setUndecorated(true);
 
@@ -26,16 +29,18 @@ public class MessageBox {
         text.setHorizontalAlignment(JButton.CENTER);
         messageBoxPanel.add(text);
 
-        messageBox = new JLabel(new ImageIcon(MessageBox.class.getResource("/img/TextBar.png")));
-        messageBox.setHorizontalAlignment(JLabel.CENTER);
-        messageBoxPanel.add(messageBox);
-
         f.add(messageBoxPanel);
         f.setVisible(true);
     }
 
 
     void setMessage(){
+        foodImg.setIcon(null);
+        text.setText(messageText);
+    }
+
+    void setMessageWithImg(String img){
+        foodImg.setIcon(new ImageIcon(img));
         text.setText(messageText);
     }
 }
