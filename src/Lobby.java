@@ -3,7 +3,6 @@ import javax.swing.*;
 public class Lobby extends Thread{
     private JPanel leftUnderPanel;
     private JButton eattingButton;
-    private JPanel underTextPanel;
     private JLabel copyright;
     private JPanel charctorPanel;
     private JLabel charctor;
@@ -17,10 +16,6 @@ public class Lobby extends Thread{
     private JLabel fullBar;
     private JPanel binLf;
     private JPanel binRt;
-    private JLabel messege;
-    private JPanel textPanel;
-
-    static String messegeText;
     static ImageIcon hpBarImg;
     static ImageIcon fullBarImg;
 
@@ -28,6 +23,8 @@ public class Lobby extends Thread{
 
     static int onlyOne=0;
     static int click=0;
+
+    MessageBox mb;
 
     Onew o ;
 
@@ -126,20 +123,15 @@ public class Lobby extends Thread{
         fullBar.setIcon(fullBarImg);
     }
 
-    void setMessage(){
-        messege.setText(getMessegeText());
-    }
-
-    String getMessegeText(){
-        return messegeText;
-    }
     Lobby(Onew objOn) {
+
+        mb= new MessageBox();
 
         JFrame f = new JFrame("오뉴");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setResizable(false);
         f.add(lobbyPanel);
-        f.setBounds(500, 500, 500, 500);
+        f.setBounds(500, 400, 500, 400);
         f.setLocation(300, 150);
 
         o = objOn;
@@ -147,8 +139,6 @@ public class Lobby extends Thread{
         //charctorPanel.addMouseListener(new LobbyMouseAdapter());
 
         f.setVisible(true);
-
-        start();
 
         gardenButton.addActionListener(event -> {
             if (onlyOne == 0) {
@@ -158,33 +148,33 @@ public class Lobby extends Thread{
         });
 
         eattingButton.addActionListener(e -> {
-            int x=charctor.getX();
-            charctor.setLocation(x,charctor.getY());
             if(Garden.foodList.peek()!=null&&o.getFull()<100){
 
                 FoodList fd =  Garden.foodList.poll();
                 if(o.getFull()+fd.getSatiation()>=100){
-                    messegeText="포만도가"+((o.getFull()+fd.getSatiation())-100)+"만큼 올랐어요.";
+                    MessageBox.messageText="포만도가"+((o.getFull()+fd.getSatiation())-100)+"만큼 올랐어요.";
                     o.setFull(100);
                 }else{
-                    messegeText="포만도가"+fd.getSatiation()+"만큼 올랐어요.";
+                    MessageBox.messageText="포만도가"+fd.getSatiation()+"만큼 올랐어요.";
                     o.setFull(o.getFull()+ fd.getSatiation());
                 }
             }else if(Garden.foodList.peek()==null){
-                messegeText="냉장고에 먹이가 없어요!";
+                MessageBox.messageText="냉장고에 먹이가 없어요!";
             }else{
-                messegeText="오뉴는 지금 충분히 배가 불러요.";
+                MessageBox.messageText="오뉴는 지금 충분히 배가 불러요.";
             }
-            setMessage();
-            charctor.setLocation(x,charctor.getY());
+            mb.setMessage();
         });
+
+
+        start();
 
         hpBarImg=new ImageIcon(Onew.class.getResource("/img/hpBar/hpBar10.png"));
         fullBarImg=new ImageIcon(Onew.class.getResource("/img/fullBar/fullBar10.png"));
 
        for (int i=0;;i++){
            if(i==100){
-               setMessage();
+               mb.setMessage();
                i=0;
            }
            setIcon();
