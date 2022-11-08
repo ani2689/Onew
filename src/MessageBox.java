@@ -5,10 +5,10 @@ public class MessageBox {
     JFrame f;
 
     private JPanel messageBoxPanel;
-    private JButton button1;
-    private JPanel foodImgPanel;
-    private JLabel foodImg;
-    private JButton text;
+    private JLabel icon;
+    private JLabel text;
+    private JPanel iconPanel;
+    private JPanel textPanel;
 
     private JLabel messageBox;
 
@@ -22,25 +22,44 @@ public class MessageBox {
         f.setLocation(308, 540);
         f.setUndecorated(true);
 
-        text = new JButton("히히");
-        text.setBorderPainted(false);
-        text.setContentAreaFilled(false);
-        text.setFocusPainted(false);
-        text.setHorizontalAlignment(JButton.CENTER);
-        messageBoxPanel.add(text);
-
         f.add(messageBoxPanel);
         f.setVisible(true);
     }
 
 
-    void setMessage(){
-        foodImg.setIcon(null);
+    void setMessageWithTalk(){
+        try {
+            icon.setIcon(new ImageIcon(MessageBox.class.getResource("/img/talk.png")));
+        }catch (Exception e){
+
+        }
         text.setText(messageText);
     }
 
-    void setMessageWithImg(String img){
-        foodImg.setIcon(new ImageIcon(img));
+    void setMessageWithFood(String img){
+        try {
+            icon.setIcon(new ImageIcon(MessageBox.class.getResource(img)));
+        }catch (Exception e){
+
+        }
+        text.setText(messageText);
+    }
+
+
+    void setMessageWithWhy(){
+        try {
+            icon.setIcon(new ImageIcon(MessageBox.class.getResource("/img/why.png")));
+        }catch (Exception e){
+
+        }
+        text.setText(messageText);
+    }
+    void setMessageWithWow(){
+        try {
+            icon.setIcon(new ImageIcon(MessageBox.class.getResource("/img/wow.png")));
+        }catch (Exception e){
+
+        }
         text.setText(messageText);
     }
 }

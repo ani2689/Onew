@@ -158,13 +158,13 @@ public class Lobby extends Thread{
                     MessageBox.messageText="포만도가"+fd.getSatiation()+"만큼 올랐어요.";
                     o.setFull(o.getFull()+ fd.getSatiation());
                 }
-                mb.setMessageWithImg(fd.getImg());
+                mb.setMessageWithFood(fd.getImg());
             }else if(Garden.foodList.peek()==null){
                 MessageBox.messageText="냉장고에 먹이가 없어요!";
-                mb.setMessage();
+                mb.setMessageWithWow();
             }else{
                 MessageBox.messageText="오뉴는 지금 충분히 배가 불러요.";
-                mb.setMessage();
+                mb.setMessageWithTalk();
             }
         });
 
@@ -176,7 +176,7 @@ public class Lobby extends Thread{
 
        for (int i=0;;i++){
            if(i==100){
-               mb.setMessage();
+               mb.setMessageWithTalk();
                i=0;
            }
            setIcon();
