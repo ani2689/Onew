@@ -20,7 +20,7 @@ public class Onew extends Thread{
 
 
 
-    String costume="thief";
+    String costume="hat";
 
     Onew(String name){
         this.name = name;
@@ -42,7 +42,11 @@ public class Onew extends Thread{
             Lobby.hpBarImg=hpBarIcon[hp/10];
             Lobby.fullBarImg=fullBarIcon[full/10];
             try {
-                sleep(1000);
+                for(int i=0;i<100;i++){
+                    sleep(10);
+                    Lobby.hpBarImg=hpBarIcon[hp/10];
+                    Lobby.fullBarImg=fullBarIcon[full/10];
+                }
                 if(hp<=0){
                     Main.gameOver++;
                     return;

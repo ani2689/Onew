@@ -13,6 +13,8 @@ public class Garden extends Thread {
     private JPanel gamePanel;
     private JPanel exitPanel;
     private JButton exit;
+    private JLabel coinText;
+    private JLabel coinCount;
 
     static Queue<FoodList> foodList = new LinkedList<>();
 
@@ -21,6 +23,7 @@ public class Garden extends Thread {
 
     Garden(Onew o) {
         this.o = o;
+        setCoinText();
     }
 
 
@@ -47,23 +50,23 @@ public class Garden extends Thread {
         new FarmmerMove().start();
 
         while (true) {
+            int satiation;
             try {
                 Thread.sleep((int) (Math.random() * 1500) + 500);
                 gamePanel.remove(bg);
-                int rand =((int)Math.random())*100;
-                int satiation=1;
-                if(rand>=97){
+                int rand =(int)(Math.random()*15);
+                if(rand>=15){
                     satiation = 0;
-                }else if(rand>=85){
+                }else if(rand>=12){
                     satiation = 4;
-                }else if(rand>=65){
+                }else if(rand>=8){
                     satiation = 3;
-                }else if(rand>=30){
+                }else if(rand>=4){
                     satiation = 2;
                 }else{
                     satiation = 1;
                 }
-                new Food((int) (Math.random() * (gamePanel.getWidth() - 95)) + 12, (int) (Math.random() * (gamePanel.getHeight() - 95)) + 12, satiation);
+                new Food((int) (Math.random() * (gamePanel.getWidth() - 95)) + 12, (int) (Math.random() * (gamePanel.getHeight() - 95)) + 12, 0);
                 gamePanel.add(bg);
 
             } catch (Exception e) {
@@ -127,6 +130,7 @@ public class Garden extends Thread {
                     foodList.add(saveFood);
                 } else {
                     o.setCoin((o.getCoin())+1);
+                    setCoinText();
                 }
 
                 foodButton.setVisible(false);
@@ -184,6 +188,10 @@ public class Garden extends Thread {
                     foodNum = 1;
             }
         }
+    }
+
+    void setCoinText(){
+        coinCount.setText(String.valueOf(o.getCoin()));
     }
 }
 

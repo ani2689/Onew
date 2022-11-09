@@ -31,97 +31,6 @@ public class Lobby extends Thread{
 
     Onew o ;
 
-    /*
-    class LobbyMouseAdapter implements MouseListener {
-
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            click=0;
-
-            click++;
-
-            try {
-                if(e.getX()>charctor.getX()){
-                    ImageIcon ic0 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+ costume +"Walk0.png"));
-                    ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+ costume +"Walk1.png"));
-                    ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+ costume +"Walk2.png"));
-
-                    while(e.getX()>charctor.getX()){
-                        charctor.setIcon(ic1);
-                        Thread.sleep(200);
-                        charctor.setLocation(charctor.getX()+5,charctor.getY());
-
-                        charctor.setIcon(ic0);
-                        Thread.sleep(200);
-                        charctor.setLocation(charctor.getX()+2,charctor.getY());
-
-                        charctor.setIcon(ic2);
-                        Thread.sleep(200);
-                        charctor.setLocation(charctor.getX()+5,charctor.getY());
-
-                        charctor.setIcon(ic0);
-                        Thread.sleep(200);
-                        charctor.setLocation(charctor.getX()+2,charctor.getY());
-                    }
-                    charctor.setIcon(ic1);
-                }else if(e.getX()-70<=charctor.getX()){
-                    ImageIcon ic0 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+ costume +"Walk0.png"));
-                    ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+ costume +"Walk1.png"));
-                    ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+ costume +"Walk2.png"));
-
-                    while(e.getX()-70<charctor.getX()){
-
-                        charctor.setIcon(ic1);
-                        Thread.sleep(200);
-                        charctor.setLocation(charctor.getX()-5,charctor.getY());
-
-                        charctor.setIcon(ic0);
-                        Thread.sleep(200);
-                        charctor.setLocation(charctor.getX()-2,charctor.getY());
-
-                        charctor.setIcon(ic2);
-                        Thread.sleep(200);
-                        charctor.setLocation(charctor.getX()-5,charctor.getY());
-
-                        charctor.setIcon(ic0);
-                        Thread.sleep(200);
-                        charctor.setLocation(charctor.getX()-2,charctor.getY());
-                    }
-                    charctor.setIcon(ic1);
-                }
-
-                click--;
-
-            }catch (Exception er){
-                er.printStackTrace();
-            }
-
-
-
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
-    }*/
-
-
     void setIcon(){
         hpBar.setIcon(hpBarImg);
         fullBar.setIcon(fullBarImg);
@@ -139,9 +48,8 @@ public class Lobby extends Thread{
         f.setLocation(300, 150);
 
         o = objOn;
+        setCostume(o);
         //new FittingRoom(o);
-
-        //charctorPanel.addMouseListener(new LobbyMouseAdapter());
 
         f.setVisible(true);
 
@@ -157,12 +65,13 @@ public class Lobby extends Thread{
 
                 FoodList fd =  Garden.foodList.poll();
                 if(o.getFull()+fd.getSatiation()>=100){
-                    MessageBox.messageText="포만도가"+((o.getFull()+fd.getSatiation())-100)+"만큼 올랐어요.";
                     o.setFull(100);
+                    MessageBox.messageText="포만도가"+((o.getFull()+fd.getSatiation())-100)+"만큼 올랐어요."+"\t(현재 포만도 : "+o.getFull()+")";
                 }else{
-                    MessageBox.messageText="포만도가"+fd.getSatiation()+"만큼 올랐어요.";
                     o.setFull(o.getFull()+ fd.getSatiation());
+                    MessageBox.messageText="포만도가"+fd.getSatiation()+"만큼 올랐어요."+"\t(현재 포만도 : "+o.getFull()+")";;
                 }
+
                 mb.setMessageWithFood(fd.getImg());
             }else if(Garden.foodList.peek()==null){
                 MessageBox.messageText="냉장고에 먹이가 없어요!";
@@ -197,18 +106,19 @@ public class Lobby extends Thread{
 
     @Override
     public void run() {
+
+
         onewMove(o);
     }
 
     void onewMove(Onew o) {
-        setCostume(o);
 
         try {
             while (click==0) {
 
                 setCostume(o);
 
-                int randAction = (int) (Math.random() * 8);
+                int randAction = ((int) (Math.random() * 8));
 
                 switch (randAction) {
                     case 0:
@@ -236,12 +146,10 @@ public class Lobby extends Thread{
                         rightSee();
                         break;
 
-
-
-
                 }
             }
         }catch (Exception e){
+
             return;
         }
     }
@@ -300,19 +208,13 @@ public class Lobby extends Thread{
     public void leftSee() throws InterruptedException {
         ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+costume+"1.png"));
         ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+costume+"2.png"));
-        for(int i=0;i<(Math.random()*3+5);i++){
+        for(int i=0;i<(Math.random()*3+5)&&click==0;i++){
             charctor.setIcon(ic1);
-            for(int j=0;j<10;j++){
-                if(click!=0){
-                    return;
-                }
+            for(int j=0;j<10&&click==0;j++){
                 Thread.sleep(50);
             }
             charctor.setIcon(ic2);
-            for(int j=0;j<10;j++){
-                if(click!=0){
-                    return;
-                }
+            for(int j=0;j<10&&click==0;j++){
                 Thread.sleep(50);
             }
         }
@@ -321,19 +223,13 @@ public class Lobby extends Thread{
     public void rightSee() throws InterruptedException {
         ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+costume+"1.png"));
         ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+costume+"2.png"));
-        for(int i=0;i<(Math.random()*3+5);i++){
+        for(int i=0;i<(Math.random()*3+5)&&click==0;i++){
             charctor.setIcon(ic1);
-            for(int j=0;j<10;j++){
-                if(click!=0){
-                    return;
-                }
+            for(int j=0;j<10&&click==0;j++){
                 Thread.sleep(50);
             }
             charctor.setIcon(ic2);
-            for(int j=0;j<10;j++){
-                if(click!=0){
-                    return;
-                }
+            for(int j=0;j<10&&click==0;j++){
                 Thread.sleep(50);
             }
         }
@@ -345,41 +241,29 @@ public class Lobby extends Thread{
         ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+ costume +"Walk1.png"));
         ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+ costume +"Walk2.png"));
 
-        for(int i=0;i<(Math.random()*30+3)&&charctor.getX()>=30;i++){
+        for(int i=0;i<(Math.random()*30+3)&&charctor.getX()>=-130&&click==0;i++){
             charctor.setIcon(ic1);
             charctor.setLocation(charctor.getX()-5,charctor.getY());
 
-            for(int j=0;j<10;j++) {
-                if (click != 0) {
-                    return;
-                }
+            for(int j=0;j<10&&click==0;j++) {
                 Thread.sleep(20);
             }
 
             charctor.setIcon(ic0);
             charctor.setLocation(charctor.getX()-2,charctor.getY());
-            for(int j=0;j<10;j++) {
-                if (click != 0) {
-                    return;
-                }
+            for(int j=0;j<10&&click==0;j++) {
                 Thread.sleep(20);
             }
 
             charctor.setIcon(ic2);
             charctor.setLocation(charctor.getX()-5,charctor.getY());
-            for(int j=0;j<10;j++) {
-                if (click != 0) {
-                    return;
-                }
+            for(int j=0;j<10&&click==0;j++) {
                 Thread.sleep(20);
             }
 
             charctor.setIcon(ic0);
             charctor.setLocation(charctor.getX()-2,charctor.getY());
-            for(int j=0;j<10;j++) {
-                if (click != 0) {
-                    return;
-                }
+            for(int j=0;j<10&&click==0;j++) {
                 Thread.sleep(20);
             }
         }
@@ -393,40 +277,28 @@ public class Lobby extends Thread{
         ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+ costume +"Walk1.png"));
         ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+ costume +"Walk2.png"));
 
-        for(int i=0;i<(Math.random()*30+3)&&charctor.getX()<=280;i++){
+        for(int i=0;i<(Math.random()*30+3)&&charctor.getX()<=130&&click==0;i++){
             charctor.setIcon(ic1);
             charctor.setLocation(charctor.getX()+5,charctor.getY());
-            for(int j=0;j<10;j++) {
-                if (click != 0) {
-                    return;
-                }
+            for(int j=0;j<10&&click==0;j++) {
                 Thread.sleep(20);
             }
 
             charctor.setIcon(ic0);
             charctor.setLocation(charctor.getX()+2,charctor.getY());
-            for(int j=0;j<10;j++) {
-                if (click != 0) {
-                    return;
-                }
+            for(int j=0;j<10&&click==0;j++) {
                 Thread.sleep(20);
             }
 
             charctor.setIcon(ic2);
             charctor.setLocation(charctor.getX()+5,charctor.getY());
-            for(int j=0;j<10;j++) {
-                if (click != 0) {
-                    return;
-                }
+            for(int j=0;j<10&&click==0;j++) {
                 Thread.sleep(20);
             }
 
             charctor.setIcon(ic0);
             charctor.setLocation(charctor.getX()+2,charctor.getY());
-            for(int j=0;j<10;j++) {
-                if (click != 0) {
-                    return;
-                }
+            for(int j=0;j<10&&click==0;j++) {
                 Thread.sleep(20);
             }
         }
