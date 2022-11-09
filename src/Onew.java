@@ -6,7 +6,21 @@ public class Onew extends Thread{
     private int full=100;
     private int hp=100;
 
-    String costume="chick";
+    private int coin=0;
+
+
+    public int getCoin() {
+        return coin;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
+
+
+
+    String costume="thief";
 
     Onew(String name){
         this.name = name;

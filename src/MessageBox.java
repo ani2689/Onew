@@ -19,7 +19,7 @@ public class MessageBox {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setResizable(false);
         f.setBounds(490, 102, 484, 102);
-        f.setLocation(308, 540);
+        f.setLocation(300, 540);
         f.setUndecorated(true);
 
         f.add(messageBoxPanel);

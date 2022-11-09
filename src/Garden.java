@@ -16,62 +16,77 @@ public class Garden extends Thread {
 
     static Queue<FoodList> foodList = new LinkedList<>();
 
+    Onew o;
 
-    Garden(){
 
+    Garden(Onew o) {
+        this.o = o;
     }
 
 
     @Override
-    public void run(){
+    public void run() {
         JFrame f = new JFrame("가든");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon background = new ImageIcon(Lobby.class.getResource("/img/box.png"));
-        JLabel bg= new JLabel(background);
+        JLabel bg = new JLabel(background);
         gamePanel.add(bg);
         f.setResizable(false);
         f.add(gardenPanel);
-        f.setBounds(500,500,500,500);
-        f.setLocation(785,150);
+        f.setBounds(500, 500, 500, 500);
+        f.setLocation(785, 150);
 
         f.setVisible(true);
 
 
         exit.addActionListener(event -> {
             f.setVisible(false);
-            Lobby.onlyOne--;
+            Lobby.onlyOneForGarden--;
         });
 
-        new FammerMove().start();
+        new FarmmerMove().start();
 
-        while(true){
-            try{
-                Thread.sleep((int)(Math.random()*1500)+500);
+        while (true) {
+            try {
+                Thread.sleep((int) (Math.random() * 1500) + 500);
                 gamePanel.remove(bg);
-                new Food((int)(Math.random()* (gamePanel.getWidth()-95))+12,(int)(Math.random()* (gamePanel.getHeight()-95))+12,(int)(Math.random()*4)+1);
+                int rand =((int)Math.random())*100;
+                int satiation=1;
+                if(rand>=97){
+                    satiation = 0;
+                }else if(rand>=85){
+                    satiation = 4;
+                }else if(rand>=65){
+                    satiation = 3;
+                }else if(rand>=30){
+                    satiation = 2;
+                }else{
+                    satiation = 1;
+                }
+                new Food((int) (Math.random() * (gamePanel.getWidth() - 95)) + 12, (int) (Math.random() * (gamePanel.getHeight() - 95)) + 12, satiation);
                 gamePanel.add(bg);
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
         }
     }
 
-    class FammerMove extends Thread{
+    class FarmmerMove extends Thread {
         @Override
         public void run() {
-            ImageIcon ic1 =  new ImageIcon(Lobby.class.getResource("/img/farmer1.png"));
-            ImageIcon ic2 =  new ImageIcon(Lobby.class.getResource("/img/farmer2.png"));
+            ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/farmer1.png"));
+            ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/farmer2.png"));
 
             try {
-                while(true){
+                while (true) {
                     farmmer.setIcon(ic1);
                     Thread.sleep(500);
                     farmmer.setIcon(ic2);
                     Thread.sleep(500);
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
         }
@@ -85,10 +100,10 @@ public class Garden extends Thread {
         private int x;
         private int y;
 
-        Food(int x,int y, int satiation){
+        Food(int x, int y, int satiation) {
             this.x = x;
             this.y = y;
-            this.satiation=satiation;
+            this.satiation = satiation;
             setFoodNum();
 
             ImageIcon imgIc = new ImageIcon(Garden.class.getResource(getImg()));
@@ -99,29 +114,33 @@ public class Garden extends Thread {
             foodButton.setFocusPainted(false);
 
             ImageIcon ic = imgIc;
-            Image im =ic.getImage();
-            Image im2 = im.getScaledInstance(72,72,Image.SCALE_SMOOTH);
+            Image im = ic.getImage();
+            Image im2 = im.getScaledInstance(72, 72, Image.SCALE_SMOOTH);
             ImageIcon ic2 = new ImageIcon(im2);
             foodButton.setRolloverIcon(ic2);
 
             foodButton.addActionListener(e -> {
-                int nextCount = Integer.parseInt(score.getText())+1;
-                score.setText(String.valueOf(nextCount));
-                FoodList saveFood=new FoodList(satiation,getImg());
-                foodList.add(saveFood);
+                if (satiation != 0) {
+                    int nextCount = Integer.parseInt(score.getText()) + 1;
+                    score.setText(String.valueOf(nextCount));
+                    FoodList saveFood = new FoodList(satiation, getImg());
+                    foodList.add(saveFood);
+                } else {
+                    o.setCoin((o.getCoin())+1);
+                }
 
                 foodButton.setVisible(false);
             });
 
             gamePanel.add(foodButton);
-            foodButton.setBounds(x,y,72,72);
+            foodButton.setBounds(x, y, 72, 72);
 
         }
 
-        String getImg(){
+        String getImg() {
             String number;
 
-            switch (satiation){
+            switch (satiation) {
                 case 1:
                     number = "one";
                     break;
@@ -134,36 +153,37 @@ public class Garden extends Thread {
                 case 4:
                     number = "four";
                     break;
+                case 0:
+                    return "/img/coin.png";
                 default:
                     number = "";
             }
 
-            return "/img/garden/"+number+"/food"+ foodNum +".png";
+            return "/img/garden/" + number + "/food" + foodNum + ".png";
 
         }
 
-        void setFoodNum(){
-            switch (satiation){
+        void setFoodNum() {
+            switch (satiation) {
                 case 1:
-                    foodNum =(int)(Math.random()*8)+1;
+                    foodNum = (int) (Math.random() * 8) + 1;
                     break;
                 case 2:
-                    foodNum =(int)(Math.random()*13)+1;
+                    foodNum = (int) (Math.random() * 13) + 1;
                     break;
                 case 3:
-                    foodNum =(int)(Math.random()*9)+1;
+                    foodNum = (int) (Math.random() * 9) + 1;
                     break;
                 case 4:
-                    foodNum =(int)(Math.random()*11)+1;
+                    foodNum = (int) (Math.random() * 11) + 1;
+                    break;
+                case 0:
+                    foodNum = 0;
                     break;
                 default:
-                    foodNum =1;
+                    foodNum = 1;
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Garden().start();
     }
 }
 

@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Lobby extends Thread{
     private JPanel leftUnderPanel;
@@ -21,7 +23,8 @@ public class Lobby extends Thread{
 
     String costume;
 
-    static int onlyOne=0;
+    static int onlyOneForGarden=0;
+    static int onlyOneForFittingRoom=0;
     static int click=0;
 
     MessageBox mb;
@@ -118,6 +121,7 @@ public class Lobby extends Thread{
         }
     }*/
 
+
     void setIcon(){
         hpBar.setIcon(hpBarImg);
         fullBar.setIcon(fullBarImg);
@@ -135,15 +139,16 @@ public class Lobby extends Thread{
         f.setLocation(300, 150);
 
         o = objOn;
+        //new FittingRoom(o);
 
         //charctorPanel.addMouseListener(new LobbyMouseAdapter());
 
         f.setVisible(true);
 
         gardenButton.addActionListener(event -> {
-            if (onlyOne == 0) {
-                onlyOne++;
-                new Garden().start();
+            if (onlyOneForGarden == 0) {
+                onlyOneForGarden++;
+                new Garden(o).start();
             }
         });
 
