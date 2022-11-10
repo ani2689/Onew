@@ -38,7 +38,11 @@ public class Lobby extends Thread{
 
     Lobby(Onew objOn) {
 
+        o = objOn;
+        setCostume(o);
+
         mb= new MessageBox();
+        new FittingRoom(o,mb);
 
         JFrame f = new JFrame("오뉴");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,9 +50,6 @@ public class Lobby extends Thread{
         f.add(lobbyPanel);
         f.setBounds(500, 400, 500, 400);
         f.setLocation(300, 150);
-
-        o = objOn;
-        setCostume(o);
         //new FittingRoom(o);
 
         f.setVisible(true);

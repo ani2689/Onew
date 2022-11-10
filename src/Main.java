@@ -1,18 +1,16 @@
 
 
-public class Main{
+public class Main extends Thread{
 
     static int gameOver;
-    Onew o = new Onew("히");
+
     public static void main(String[] args) {
-        new Main();
+        //Onew o = new Onew("히");
+        //new Lobby(o);
     }
 
     Main(){
-        lobbyFrame();
+
     }
 
-    public void lobbyFrame(){
-        new Lobby(o);
-    }
 }

@@ -55,7 +55,7 @@ public class Garden extends Thread {
                 Thread.sleep((int) (Math.random() * 1500) + 500);
                 gamePanel.remove(bg);
                 int rand =(int)(Math.random()*15);
-                if(rand>=15){
+                if(rand>=14){
                     satiation = 0;
                 }else if(rand>=12){
                     satiation = 4;
@@ -66,7 +66,7 @@ public class Garden extends Thread {
                 }else{
                     satiation = 1;
                 }
-                new Food((int) (Math.random() * (gamePanel.getWidth() - 95)) + 12, (int) (Math.random() * (gamePanel.getHeight() - 95)) + 12, 0);
+                new Food((int) (Math.random() * (gamePanel.getWidth() - 95)) + 12, (int) (Math.random() * (gamePanel.getHeight() - 95)) + 12, satiation);
                 gamePanel.add(bg);
 
             } catch (Exception e) {
