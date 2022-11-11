@@ -6,7 +6,7 @@ public class Onew extends Thread{
     private int full=100;
     private int hp=100;
 
-    private int coin=0;
+    private int coin=80;
 
 
     public int getCoin() {

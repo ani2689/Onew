@@ -32,37 +32,21 @@ public class MessageBox {
         noButton.setVisible(false);
     }
 
-    void buyQnA(JButton bt,Clothing ct){
+    void qnaUp(){
         yesButton.setVisible(true);
         noButton.setVisible(true);
-
-        AtomicBoolean ready= new AtomicBoolean(false);
-        AtomicBoolean answer = new AtomicBoolean(false);
-
-        yesButton.addActionListener(e -> {
-            FittingRoom.answer=true;
-            FittingRoom.ready=true;
-
-            yesButton.setVisible(false);
-            noButton.setVisible(false);
-
-            MessageBox.messageText="옷을 구매했어요.";
+    }
+    void qnaDown(){
+        yesButton.setVisible(false);
+        noButton.setVisible(false);
+    }
 
 
-            ct.setSell(true);
-        });
-
-        noButton.addActionListener(e -> {
-            FittingRoom.answer=false;
-            FittingRoom.ready=true;
-
-            yesButton.setVisible(false);
-            noButton.setVisible(false);
-
-            MessageBox.messageText="옷을 구매하지 않았어요.";
-            setMessageWithTalk();
-
-        });
+    JButton getYesButton(){
+        return yesButton;
+    }
+    JButton getNoButton(){
+        return noButton;
     }
 
 

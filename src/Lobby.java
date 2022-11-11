@@ -42,7 +42,8 @@ public class Lobby extends Thread{
         setCostume(o);
 
         mb= new MessageBox();
-        new FittingRoom(o,mb);
+
+        new FittingRoom(o,mb).start();
 
         JFrame f = new JFrame("오뉴");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -207,9 +208,11 @@ public class Lobby extends Thread{
     }
 
     public void leftSee() throws InterruptedException {
-        ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+costume+"1.png"));
-        ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+costume+"2.png"));
         for(int i=0;i<(Math.random()*3+5)&&click==0;i++){
+
+            ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+costume+"1.png"));
+            ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+costume+"2.png"));
+
             charctor.setIcon(ic1);
             for(int j=0;j<10&&click==0;j++){
                 Thread.sleep(50);
@@ -222,9 +225,12 @@ public class Lobby extends Thread{
     }
 
     public void rightSee() throws InterruptedException {
-        ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+costume+"1.png"));
-        ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+costume+"2.png"));
+
         for(int i=0;i<(Math.random()*3+5)&&click==0;i++){
+
+            ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+costume+"1.png"));
+            ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+costume+"2.png"));
+
             charctor.setIcon(ic1);
             for(int j=0;j<10&&click==0;j++){
                 Thread.sleep(50);
@@ -238,11 +244,16 @@ public class Lobby extends Thread{
 
     public void leftWalk() throws InterruptedException {
 
-        ImageIcon ic0 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+ costume +"Walk0.png"));
+        ImageIcon ic0;
         ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+ costume +"Walk1.png"));
-        ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+ costume +"Walk2.png"));
+        ImageIcon ic2;
 
         for(int i=0;i<(Math.random()*30+3)&&charctor.getX()>=-130&&click==0;i++){
+
+            ic0 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+ costume +"Walk0.png"));
+            ic1 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+ costume +"Walk1.png"));
+            ic2 = new ImageIcon(Lobby.class.getResource("/img/left/charctor"+ costume +"Walk2.png"));
+
             charctor.setIcon(ic1);
             charctor.setLocation(charctor.getX()-5,charctor.getY());
 
@@ -274,11 +285,16 @@ public class Lobby extends Thread{
 
     public void rightWalk() throws InterruptedException {
 
-        ImageIcon ic0 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+ costume +"Walk0.png"));
+        ImageIcon ic0;
         ImageIcon ic1 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+ costume +"Walk1.png"));
-        ImageIcon ic2 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+ costume +"Walk2.png"));
+        ImageIcon ic2;
 
         for(int i=0;i<(Math.random()*30+3)&&charctor.getX()<=130&&click==0;i++){
+
+            ic0 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+ costume +"Walk0.png"));
+            ic1 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+ costume +"Walk1.png"));
+            ic2 = new ImageIcon(Lobby.class.getResource("/img/right/charctor"+ costume +"Walk2.png"));
+
             charctor.setIcon(ic1);
             charctor.setLocation(charctor.getX()+5,charctor.getY());
             for(int j=0;j<10&&click==0;j++) {
