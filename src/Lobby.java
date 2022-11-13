@@ -23,13 +23,14 @@ public class Lobby extends Thread{
 
     String costume;
 
-    static int onlyOneForGarden=0;
-    static int onlyOneForFittingRoom=0;
+    static boolean onlyOneForGarden =true;
+    static boolean onlyOneForFittingRoom=true;
     static int click=0;
 
     MessageBox mb;
 
     Onew o ;
+
 
     void setIcon(){
         hpBar.setIcon(hpBarImg);
@@ -53,11 +54,40 @@ public class Lobby extends Thread{
         f.setLocation(300, 150);
         //new FittingRoom(o);
 
-        f.setVisible(true);
+        f.setVisible(true);charctor.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                if(onlyOneForFittingRoom){
+                    onlyOneForFittingRoom=false;
+                    new FittingRoom(o,mb).start();
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         gardenButton.addActionListener(event -> {
-            if (onlyOneForGarden == 0) {
-                onlyOneForGarden++;
+            if (onlyOneForGarden) {
+                onlyOneForGarden=false;
                 new Garden(o).start();
             }
         });
@@ -324,7 +354,7 @@ public class Lobby extends Thread{
     }
 
     void setCostume(Onew o){
-        this.costume=o.costume;
+        this.costume= o.getCostume();
     }
 
 }

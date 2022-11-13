@@ -49,6 +49,11 @@ public class MessageBox {
         return noButton;
     }
 
+    void setYesNoButton(JButton yesButton,JButton noButton){
+        this.yesButton=yesButton;
+        this.noButton=noButton;
+    }
+
 
 
     void setMessageWithTalk(){

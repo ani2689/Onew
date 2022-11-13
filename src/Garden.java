@@ -30,7 +30,6 @@ public class Garden extends Thread {
     @Override
     public void run() {
         JFrame f = new JFrame("가든");
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon background = new ImageIcon(Lobby.class.getResource("/img/box.png"));
         JLabel bg = new JLabel(background);
         gamePanel.add(bg);
@@ -43,8 +42,8 @@ public class Garden extends Thread {
 
 
         exit.addActionListener(event -> {
-            f.setVisible(false);
-            Lobby.onlyOneForGarden--;
+            f.dispose();
+            Lobby.onlyOneForGarden=true;
         });
 
         new FarmmerMove().start();
@@ -85,8 +84,10 @@ public class Garden extends Thread {
             try {
                 while (true) {
                     farmmer.setIcon(ic1);
+                    setCoinText();
                     Thread.sleep(500);
                     farmmer.setIcon(ic2);
+                    setCoinText();
                     Thread.sleep(500);
                 }
             } catch (Exception e) {

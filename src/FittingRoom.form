@@ -39,6 +39,7 @@
                   <focusPainted value="false"/>
                   <focusTraversalPolicyProvider value="false"/>
                   <focusable value="false"/>
+                  <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="img/!.png"/>
                   <opaque value="false"/>
@@ -60,6 +61,7 @@
                   <focusPainted value="false"/>
                   <focusTraversalPolicyProvider value="false"/>
                   <focusable value="false"/>
+                  <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="img/!.png"/>
                   <opaque value="false"/>
@@ -81,6 +83,7 @@
                   <focusPainted value="false"/>
                   <focusTraversalPolicyProvider value="false"/>
                   <focusable value="false"/>
+                  <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="img/!.png"/>
                   <opaque value="false"/>
@@ -102,6 +105,7 @@
                   <focusPainted value="false"/>
                   <focusTraversalPolicyProvider value="false"/>
                   <focusable value="false"/>
+                  <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="img/!.png"/>
                   <opaque value="false"/>
@@ -123,6 +127,7 @@
                   <focusPainted value="false"/>
                   <focusTraversalPolicyProvider value="false"/>
                   <focusable value="false"/>
+                  <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="img/!.png"/>
                   <opaque value="false"/>
@@ -144,12 +149,13 @@
                   <focusPainted value="false"/>
                   <focusTraversalPolicyProvider value="false"/>
                   <focusable value="false"/>
+                  <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="img/!.png"/>
                   <opaque value="false"/>
                   <requestFocusEnabled value="true"/>
                   <rolloverEnabled value="true"/>
-                  <text value="더욱 반짝거리는 눈!"/>
+                  <text value="반짝이는 눈!"/>
                   <verticalTextPosition value="3"/>
                 </properties>
               </component>
@@ -165,6 +171,7 @@
                   <focusPainted value="false"/>
                   <focusTraversalPolicyProvider value="false"/>
                   <focusable value="false"/>
+                  <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="img/!.png"/>
                   <opaque value="false"/>
@@ -186,6 +193,7 @@
                   <focusPainted value="false"/>
                   <focusTraversalPolicyProvider value="false"/>
                   <focusable value="false"/>
+                  <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="img/!.png"/>
                   <opaque value="false"/>
@@ -207,6 +215,7 @@
                   <focusPainted value="false"/>
                   <focusTraversalPolicyProvider value="false"/>
                   <focusable value="false"/>
+                  <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="img/!.png"/>
                   <opaque value="false"/>
@@ -228,6 +237,7 @@
                   <focusPainted value="false"/>
                   <focusTraversalPolicyProvider value="false"/>
                   <focusable value="false"/>
+                  <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="img/!.png"/>
                   <opaque value="false"/>
@@ -249,6 +259,7 @@
                   <focusPainted value="false"/>
                   <focusTraversalPolicyProvider value="false"/>
                   <focusable value="false"/>
+                  <horizontalAlignment value="2"/>
                   <horizontalTextPosition value="0"/>
                   <icon value="img/!.png"/>
                   <label value="도둑 패키지"/>
