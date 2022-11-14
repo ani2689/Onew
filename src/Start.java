@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class Start {
+public class Start extends Thread{
     private JPanel startPanel;
     private JPanel empty1;
     private JPanel empty2;
@@ -9,19 +9,24 @@ public class Start {
     private JLabel text;
     private JTextField readText;
     private JButton checkButton;
+    private JLabel subText;
 
     private JFrame f;
 
-    static String name;
-
     Start() {
+        start();
+    }
+
+    @Override
+    public void run() {
         f=new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setResizable(false);
-        f.setBounds(300,200,300,200);
+        f.setBounds(400,250,400,250);
         f.setLocation(400,400);
 
         f.add(startPanel);
+        subText.setVisible(false);
         f.setVisible(true);
     }
 
@@ -37,7 +42,8 @@ public class Start {
         return f;
     }
 
-    public static String getName() {
-        return name;
+    public void setSubText(String str){
+        subText.setVisible(true);
+        subText.setText(str);
     }
 }

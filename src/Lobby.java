@@ -37,12 +37,41 @@ public class Lobby extends Thread{
         fullBar.setIcon(fullBarImg);
     }
 
-    Lobby(Onew objOn) {
+    Lobby(Onew o) {
+        this.o = o;
+        go();
+    }
+    void go(){
 
-        o = objOn;
         setCostume(o);
 
+        start();
+
+        hpBarImg=new ImageIcon(Onew.class.getResource("/img/hpBar/hpBar10.png"));
+        fullBarImg=new ImageIcon(Onew.class.getResource("/img/fullBar/fullBar10.png"));
+
+       for (int i=0;;i++){
+           if(i==100){
+               mb.setMessageWithTalk();
+               i=0;
+           }
+           setIcon();
+           try {
+               Thread.sleep(100);
+           } catch (InterruptedException e) {
+
+           }
+       }
+    }
+
+
+
+    @Override
+    public void run() {
+
         mb= new MessageBox();
+        MessageBox.messageText="만나서 반가워요, "+o.getOnewName();
+        mb.setMessageWithTalk();
 
         new FittingRoom(o,mb).start();
 
@@ -54,7 +83,11 @@ public class Lobby extends Thread{
         f.setLocation(300, 150);
         //new FittingRoom(o);
 
-        f.setVisible(true);charctor.addMouseListener(new MouseListener() {
+        f.setVisible(true);
+
+
+
+        charctor.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
 
@@ -114,30 +147,6 @@ public class Lobby extends Thread{
             }
         });
 
-
-        start();
-
-        hpBarImg=new ImageIcon(Onew.class.getResource("/img/hpBar/hpBar10.png"));
-        fullBarImg=new ImageIcon(Onew.class.getResource("/img/fullBar/fullBar10.png"));
-
-       for (int i=0;;i++){
-           if(i==100){
-               mb.setMessageWithTalk();
-               i=0;
-           }
-           setIcon();
-           try {
-               Thread.sleep(100);
-           } catch (InterruptedException e) {
-
-           }
-       }
-    }
-
-
-
-    @Override
-    public void run() {
 
 
         onewMove(o);
