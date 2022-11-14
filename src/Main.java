@@ -1,5 +1,3 @@
-
-
 public class Main extends Thread{
 
     static int gameOver;

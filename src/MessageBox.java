@@ -105,5 +105,7 @@ public class MessageBox {
         }
     }
 
-
+    public JFrame getF() {
+        return f;
+    }
 }

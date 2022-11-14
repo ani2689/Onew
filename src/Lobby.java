@@ -155,7 +155,7 @@ public class Lobby extends Thread{
     void onewMove(Onew o) {
 
         try {
-            while (click==0) {
+            while (true) {
 
                 setCostume(o);
 
