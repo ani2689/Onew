@@ -3,8 +3,8 @@ import javax.swing.*;
 public class Onew extends Thread{
 
     private String onewName;
-    private int full=100;
-    private int hp=100;
+    private int full=0;
+    private int hp=10;
 
     private int coin=80;
 
@@ -45,7 +45,7 @@ public class Onew extends Thread{
             fullBarIcon[i] = new ImageIcon(Onew.class.getResource("/img/fullBar/fullBar"+i+".png"));
         }
 
-        while (Main.gameOver==0){
+        while (!Main.gameOver){
 
             Lobby.hpBarImg=hpBarIcon[hp/10];
             Lobby.fullBarImg=fullBarIcon[full/10];
@@ -56,7 +56,7 @@ public class Onew extends Thread{
                     Lobby.fullBarImg=fullBarIcon[full/10];
                 }
                 if(hp<=0){
-                    Main.gameOver++;
+                    Main.gameOver=true;
                     return;
                 }
                 else if(full<=0){

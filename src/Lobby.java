@@ -32,6 +32,8 @@ public class Lobby extends Thread{
     Onew o ;
 
 
+    public long time;
+
     void setIcon(){
         hpBar.setIcon(hpBarImg);
         fullBar.setIcon(fullBarImg);
@@ -71,6 +73,7 @@ public class Lobby extends Thread{
 
         mb= new MessageBox();
         MessageBox.messageText="만나서 반가워요, "+o.getOnewName();
+        time = System.currentTimeMillis();
         mb.setMessageWithTalk();
 
         new FittingRoom(o,mb).start();
@@ -81,6 +84,7 @@ public class Lobby extends Thread{
         f.add(lobbyPanel);
         f.setBounds(500, 400, 500, 400);
         f.setLocation(300, 150);
+        f.setIconImage(new ImageIcon(Start.class.getResource("img/onew.png")).getImage());
         //new FittingRoom(o);
 
         f.setVisible(true);
@@ -150,12 +154,15 @@ public class Lobby extends Thread{
 
 
         onewMove(o);
+        gameOver();
+
+
     }
 
     void onewMove(Onew o) {
 
         try {
-            while (true) {
+            while (!Main.gameOver) {
 
                 setCostume(o);
 
@@ -359,6 +366,31 @@ public class Lobby extends Thread{
             }
         }
         charctor.setIcon(ic1);
+
+    }
+
+    public void gameOver() {
+        charctor.setIcon(new ImageIcon(Lobby.class.getResource("img/die.png")));
+        eattingButton.setVisible(false);
+        gardenButton.setVisible(false);
+
+        int h,m,s;
+
+        s = (int)((System.currentTimeMillis()-time)/1000);
+        m=s/60;
+        h=m/60;
+        s=s%60;
+        m=m%60;
+
+        MessageBox.messageText="GameOver... "+h+"시간 "+m+"분 "+s+"초 동안 키웠어요.";
+        mb.setMessageWithWow();
+
+        try {
+            sleep(10000);
+            System.exit(0);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

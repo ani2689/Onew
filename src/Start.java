@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Start extends Thread{
     private JPanel startPanel;
@@ -24,6 +25,8 @@ public class Start extends Thread{
         f.setResizable(false);
         f.setBounds(400,250,400,250);
         f.setLocation(400,400);
+
+        f.setIconImage(new ImageIcon(Start.class.getResource("img/onew.png")).getImage());
 
         f.add(startPanel);
         subText.setVisible(false);

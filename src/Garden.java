@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -37,6 +39,45 @@ public class Garden extends Thread {
         f.add(gardenPanel);
         f.setBounds(500, 500, 500, 500);
         f.setLocation(785, 150);
+        f.setIconImage(new ImageIcon(Start.class.getResource("img/onew.png")).getImage());
+
+        f.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+                f.dispose();
+
+            }
+        });
 
         f.setVisible(true);
 
@@ -48,7 +89,7 @@ public class Garden extends Thread {
 
         new FarmmerMove().start();
 
-        while (true) {
+        while (!Main.gameOver) {
             int satiation;
             try {
                 Thread.sleep((int) (Math.random() * 1500) + 500);

@@ -1,6 +1,6 @@
 public class Main extends Thread{
 
-    static int gameOver;
+    static boolean gameOver;
 
     String onewName;
 
@@ -17,8 +17,8 @@ public class Main extends Thread{
         });
     }
 
-    Main(String onewName){
-        this.onewName=onewName;
+    Main(String onewName) {
+        this.onewName = onewName;
         start();
     }
 

@@ -81,6 +81,7 @@ public class FittingRoom extends Thread{
         JFrame f = new JFrame("옷장");
         f.setBounds(120,500,100,500);
         f.setLocation(185,150);
+        f.setIconImage(new ImageIcon(Start.class.getResource("img/onew.png")).getImage());
         f.setResizable(false);
         f.add(fittingRoomPanel);
         f.setVisible(true);
@@ -89,7 +90,6 @@ public class FittingRoom extends Thread{
             Lobby.onlyOneForFittingRoom=true;
             f.dispose();
         });
-
 
     }
 
@@ -135,7 +135,7 @@ public class FittingRoom extends Thread{
             });
 
         }else if(ct.getSell()==false){
-            MessageBox.messageText="옷을 구매할까요?";
+            MessageBox.messageText="옷을 구매할까요? (필요한 코인 : " + ct.getPrize()+")";
             mb.setMessageWithWhy();
 
             yesOrNo.getYesButton().addActionListener(e -> {
